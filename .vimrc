@@ -35,6 +35,9 @@ set hidden
 " Set the status line the way i like it
 set stl=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%c\ Buf:%n\ [%b][0x%B]
 
+" use :w!! to sudo save a file
+cmap w!! %!sudo tee > /dev/null %
+
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
 
@@ -63,9 +66,6 @@ set nocompatible
 " make sure syntax highlighting is on
 syntax on
 
-" no word wrap
-set nowrap
-
 " Set 7 lines to the curors - when moving vertical..
 set so=7
 
@@ -75,9 +75,15 @@ set showmode
 " Make the command-line completion better
 set wildmenu
 
+" Make default register the system clipboard
+set clipboard=unnamed
+
 " PHP-specific stuff
 let php_sql_query=1                                                                                        
 let php_htmlInStrings=1
+autocmd BufEnter *.php :%s/[ \t\r]\+$//e
+autocmd BufEnter *.phtml :%s/[ \t\r]\+$//e
+
 
 " highlight the current line
 set cursorline
@@ -131,7 +137,10 @@ endfunction
 inoremap <Tab> <C-R>=CleverTab()<CR>
 
 colorscheme wombat256
-set guifont=ProggyCleanTT\ 12
+set guifont=Monospace\ 9
+
+set guioptions-=l
+set guioptions-=b
 
 set textwidth=120
 
@@ -145,10 +154,32 @@ nmap <F7> :NERDTreeToggle<CR>
 nmap <S-F7> :NERDTreeClose<CR>
 
 " Store the bookmarks file in perforce
-let NERDTreeBookmarksFile="~/.vim/NERDTreeBookmarks"
+"let NERDTreeBookmarksFile="~/.vim/NERDTreeBookmarks"
 
 " Show the bookmarks table on startup
-let NERDTreeShowBookmarks=1
+"let NERDTreeShowBookmarks=1
+
+let NERDTreeShowHidden=1
+
+" Auto open nerdTree where i want...
+autocmd VimEnter * cd /media/Portable/Documents/workspace
+autocmd VimEnter * NERDTree
+autocmd VimEnter * wincmd p
+
+"-----------------------------------------------------------------------------
+" Tabbar Plugin Settings
+"-----------------------------------------------------------------------------
+" Yup, I don't like this one either
+"let loaded_minibufexplorer = 1
+nmap <F8> :MiniBufEpl<CR>
+let g:miniBufExplTabWrap = 1 " make tabs show complete (no broken on two lines)
+let g:miniBufExplModSelTarget = 1 " If you use other explorers like TagList you can (As of 6.2.8) set it at 1:
+let g:miniBufExplUseSingleClick = 1 " If you would like to single click on tabs rather than double clicking on them to goto the selected buffer. 
+let g:miniBufExplMaxSize = 3 " <max lines: defualt 0> setting this to 0 will mean the window gets as big as needed to fit all your buffers. 
+
+"autocmd BufRead,BufNew :call UMiniBufExplorer
+
+map <leader>u :TMiniBufExplorer<cr>:TMiniBufExplorer<cr>
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -189,3 +220,33 @@ function! VisualSearch(direction) range
     let @" = l:saved_reg
 endfunction
 
+
+
+function ToggleWrap()
+    set wrap!
+    echo &wrap ? 'wrap' : 'nowrap'
+endfunc
+
+"F12 toggles wrap (Thanks to Alexandre Moreira)
+nnoremap <silent> <F12>      :call ToggleWrap()<CR>
+vnoremap <silent> <F12> <C-C>:call ToggleWrap()<CR>
+inoremap <silent> <F12> <C-O>:call ToggleWrap()<CR>
+
+
+function ToggleHorizontalScrollbar()
+    "set guioptions+=b
+    if &go =~# "b"
+        set go-=b
+    else
+        set go+=b
+    endif
+endfunc
+
+function ToggleHorizontalScrollbar_setKeys()
+    "Shift+F12 toggles the horizontal scrollbar
+    nnoremap <silent> <S-F12>      :call ToggleHorizontalScrollbar()<CR>
+    vnoremap <silent> <S-F12> <C-C>:call ToggleHorizontalScrollbar()<CR>
+    inoremap <silent> <S-F12> <C-O>:call ToggleHorizontalScrollbar()<CR>
+endfunc
+
+au GUIEnter * call ToggleHorizontalScrollbar_setKeys()
