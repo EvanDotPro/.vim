@@ -81,9 +81,11 @@ set clipboard=unnamed
 " PHP-specific stuff
 let php_sql_query=1                                                                                        
 let php_htmlInStrings=1
-autocmd BufEnter *.php :%s/[ \t\r]\+$//e
-autocmd BufEnter *.phtml :%s/[ \t\r]\+$//e
-
+autocmd BufWrite *.php :%s/[ \t\r]\+$//e
+autocmd BufWrite *.phtml :%s/[ \t\r]\+$//e
+inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i
+nnoremap <C-P> :call PhpDocSingle()<CR>
+vnoremap <C-P> :call PhpDocRange()<CR> 
 
 " highlight the current line
 set cursorline
@@ -139,10 +141,20 @@ inoremap <Tab> <C-R>=CleverTab()<CR>
 colorscheme wombat256
 set guifont=Monospace\ 9
 
-set guioptions-=l
+"set guioptions-=l
 set guioptions-=b
+set guioptions-=r
+set guioptions-=T  "remove toolbar
 
 set textwidth=120
+
+if has("gui_running")
+  " GUI is running or is about to start.
+  " Maximize gvim window.
+  set lines=100 columns=171
+endif
+
+
 
 "-----------------------------------------------------------------------------
 " NERD Tree Plugin Settings
@@ -180,6 +192,13 @@ let g:miniBufExplMaxSize = 3 " <max lines: defualt 0> setting this to 0 will mea
 "autocmd BufRead,BufNew :call UMiniBufExplorer
 
 map <leader>u :TMiniBufExplorer<cr>:TMiniBufExplorer<cr>
+
+"-----------------------
+" Taglist
+" ----------------------
+nmap <F6> :TlistToggle<CR>
+let g:Tlist_Use_Right_Window=1
+let g:Tlist_Show_One_File=1
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
