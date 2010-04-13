@@ -81,6 +81,9 @@ set clipboard=unnamed
 " PHP-specific stuff
 let php_sql_query=1                                                                                        
 let php_htmlInStrings=1
+let php_parent_error_close = 1
+let php_parent_error_open = 1
+"let php_folding = 1
 autocmd BufWrite *.php :%s/[ \t\r]\+$//e
 autocmd BufWrite *.phtml :%s/[ \t\r]\+$//e
 inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i
