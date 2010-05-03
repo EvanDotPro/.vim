@@ -86,9 +86,9 @@ let php_parent_error_open = 1
 "let php_folding = 1
 autocmd BufWrite *.php :%s/[ \t\r]\+$//e
 autocmd BufWrite *.phtml :%s/[ \t\r]\+$//e
-inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i
-nnoremap <C-P> :call PhpDocSingle()<CR>
-vnoremap <C-P> :call PhpDocRange()<CR> 
+"inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i
+"nnoremap <C-P> :call PhpDocSingle()<CR>
+"vnoremap <C-P> :call PhpDocRange()<CR> 
 
 " highlight the current line
 set cursorline
@@ -127,7 +127,7 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 colorscheme lucius
-set guifont=ProggyCleanTT\ 14
+set guifont=Monospace\ 9
 
 "set guioptions-=l
 set guioptions-=b
@@ -174,6 +174,7 @@ nmap <F7> :NERDTreeToggle<CR>
 " Close the NERD Tree with Shift-F7
 nmap <S-F7> :NERDTreeClose<CR>
 
+
 " Store the bookmarks file in perforce
 "let NERDTreeBookmarksFile="~/.vim/NERDTreeBookmarks"
 
@@ -183,7 +184,7 @@ nmap <S-F7> :NERDTreeClose<CR>
 let NERDTreeShowHidden=1
 
 " Auto open nerdTree where i want...
-autocmd VimEnter * cd /media/Portable/Documents/workspace
+autocmd VimEnter * cd /srv/dropbox/workspace
 autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 
@@ -202,6 +203,10 @@ let g:miniBufExplMaxSize = 3 " <max lines: defualt 0> setting this to 0 will mea
 
 map <leader>u :TMiniBufExplorer<cr>:TMiniBufExplorer<cr>
 
+" I like it like irssi
+set switchbuf=usetab
+map <C-p> :bprev<CR>
+map <C-n> :bnext<CR>
 "-----------------------
 " Taglist
 " ----------------------
