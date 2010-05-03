@@ -189,6 +189,7 @@ let NERDTreeShowHidden=1
 " Auto open nerdTree where i want...
 autocmd VimEnter * cd /srv/dropbox/workspace
 autocmd VimEnter * NERDTree
+autocmd VimEnter * Alias git Git
 autocmd VimEnter * wincmd p
 
 "-----------------------------------------------------------------------------
