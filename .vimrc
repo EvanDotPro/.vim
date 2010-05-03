@@ -109,6 +109,9 @@ set autoread
 " Fast saving
 nmap <leader>w :w!<cr>
 
+" close a buffer
+nmap <leader>q :Bclose<cr>
+
 " Fast editing of the .vimrc
 map <leader>e :e! ~/.vim/.vimrc<cr>
 
