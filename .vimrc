@@ -33,7 +33,7 @@ set backspace=2
 set hidden
 
 " Set the status line the way i like it
-set stl=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%c\ Buf:%n\ [%b][0x%B]
+set stl=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%c\ Buf:%n\ [%b][0x%B]\ %{fugitive#statusline()}
 
 " use :w!! to sudo save a file
 cmap w!! %!sudo tee > /dev/null %
@@ -121,7 +121,7 @@ set nowb
 set noswapfile
 
 " When vimrc is edited, reload it
-autocmd! bufwritepost vimrc source ~/.vim/.vimrc
+autocmd! bufwritepost .vimrc source ~/.vim/.vimrc
 
 " omni completion
 set ofu=syntaxcomplete#Complete
@@ -231,12 +231,6 @@ vnoremap <silent> gv :call VisualSearch('gv')<CR>
 map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
 
 
-function! CmdLine(str)
-    exe "menu Foo.Bar :" . a:str
-    emenu Foo.Bar
-    unmenu Foo
-endfunction 
-
 " From an idea by Michael Naumann
 function! VisualSearch(direction) range
     let l:saved_reg = @"
@@ -259,7 +253,7 @@ endfunction
 
 
 
-function ToggleWrap()
+function! ToggleWrap()
     set wrap!
     echo &wrap ? 'wrap' : 'nowrap'
 endfunc
@@ -270,7 +264,7 @@ vnoremap <silent> <F12> <C-C>:call ToggleWrap()<CR>
 inoremap <silent> <F12> <C-O>:call ToggleWrap()<CR>
 
 
-function ToggleHorizontalScrollbar()
+function! ToggleHorizontalScrollbar()
     "set guioptions+=b
     if &go =~# "b"
         set go-=b
@@ -279,7 +273,7 @@ function ToggleHorizontalScrollbar()
     endif
 endfunc
 
-function ToggleHorizontalScrollbar_setKeys()
+function! ToggleHorizontalScrollbar_setKeys()
     "Shift+F12 toggles the horizontal scrollbar
     nnoremap <silent> <S-F12>      :call ToggleHorizontalScrollbar()<CR>
     vnoremap <silent> <S-F12> <C-C>:call ToggleHorizontalScrollbar()<CR>
