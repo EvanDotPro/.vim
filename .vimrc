@@ -86,9 +86,9 @@ let php_parent_error_open = 1
 "let php_folding = 1
 autocmd BufWrite *.php :%s/[ \t\r]\+$//e
 autocmd BufWrite *.phtml :%s/[ \t\r]\+$//e
-"inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i
-"nnoremap <C-P> :call PhpDocSingle()<CR>
-"vnoremap <C-P> :call PhpDocRange()<CR> 
+inoremap <C-l> <ESC>:call PhpDocSingle()<CR>i
+nnoremap <C-l> :call PhpDocSingle()<CR>
+vnoremap <C-l> :call PhpDocRange()<CR> 
 
 " highlight the current line
 set cursorline
@@ -111,6 +111,7 @@ nmap <leader>w :w!<cr>
 
 " close a buffer
 nmap <leader>q :Bclose<cr>
+nmap <C-x> :Bclose<CR>
 
 " Fast editing of the .vimrc
 map <leader>e :e! ~/.vim/.vimrc<cr>
@@ -121,7 +122,7 @@ set nowb
 set noswapfile
 
 " When vimrc is edited, reload it
-autocmd! bufwritepost .vimrc source ~/.vim/.vimrc
+"autocmd! bufwritepost .vimrc source ~/.vim/.vimrc
 
 " omni completion
 set ofu=syntaxcomplete#Complete
@@ -185,9 +186,10 @@ nmap <S-F7> :NERDTreeClose<CR>
 "let NERDTreeShowBookmarks=1
 
 let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\._git$', '\._gitignore$']
 
 " Auto open nerdTree where i want...
-autocmd VimEnter * cd /srv/dropbox/workspace
+autocmd VimEnter * cd /srv/dropbox
 autocmd VimEnter * NERDTree
 autocmd VimEnter * Alias git Git
 autocmd VimEnter * wincmd p
@@ -203,7 +205,8 @@ let g:miniBufExplModSelTarget = 1 " If you use other explorers like TagList you 
 let g:miniBufExplUseSingleClick = 1 " If you would like to single click on tabs rather than double clicking on them to goto the selected buffer. 
 let g:miniBufExplMaxSize = 3 " <max lines: defualt 0> setting this to 0 will mean the window gets as big as needed to fit all your buffers. 
 
-"autocmd BufRead,BufNew :call UMiniBufExplorer
+autocmd BufRead,BufNew,BufWritePost,CursorMovedI,CursorMoved * UMiniBufExplorer
+
 
 map <leader>u :TMiniBufExplorer<cr>:TMiniBufExplorer<cr>
 
