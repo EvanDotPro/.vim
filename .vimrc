@@ -60,6 +60,12 @@ set guicursor+=i-ci:ver25-Cursor
 set guicursor+=r-cr:hor20-Cursor
 set guicursor+=sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
 
+
+" sorry vim hardcore guys... "+gP is just f*ing retarded
+nmap <C-V> "+gP
+imap <C-V> <ESC><C-V>i
+vmap <C-C> "+y 
+
 " disable vi compatibility
 set nocompatible
 
@@ -86,6 +92,7 @@ let php_parent_error_open = 1
 "let php_folding = 1
 autocmd BufWrite *.php :%s/[ \t\r]\+$//e
 autocmd BufWrite *.phtml :%s/[ \t\r]\+$//e
+autocmd BufWrite *.css :%s/[ \t\r]\+$//e
 inoremap <C-l> <ESC>:call PhpDocSingle()<CR>i
 nnoremap <C-l> :call PhpDocSingle()<CR>
 vnoremap <C-l> :call PhpDocRange()<CR> 
