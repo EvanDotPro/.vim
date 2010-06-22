@@ -62,8 +62,6 @@ set guicursor+=sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
 
 
 " sorry vim hardcore guys... "+gP is just f*ing retarded
-nmap <C-V> "+gP
-imap <C-V> <ESC><C-V>i
 vmap <C-C> "+y 
 
 " disable vi compatibility
