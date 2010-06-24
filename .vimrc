@@ -6,6 +6,7 @@ call pathogen#runtime_append_all_bundles()
 
 " Let's use the sexy lucius color theme
 colors lucius
+set guifont=Monospace\ 9
 
 " Enable loading filetype and indentation plugins
 filetype plugin on
@@ -43,6 +44,15 @@ set smartcase
 " allow buffers to have unsaved changes
 set hidden
 
+" Fast saving
+nmap <leader>w :w!<cr>
+
+" Fast editing of the .vimrc
+map <leader>e :e! ~/.vim/.vimrc<cr>
+" When vimrc is edited, reload it
+autocmd! bufwritepost .vimrc source ~/.vim/.vimrc
+autocmd! bufwritepost .vimrc NERDTreeToggle|NERDTreeToggle
+
 
 """""""" STATUS / COMMAND LINE
 
@@ -54,3 +64,28 @@ set ch=2
 
 " Set the status line the way i like it
 "set stl=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%c\ Buf:%n\ [%b][0x%B]\ %{fugitive#statusline()}
+
+
+"-----------------------------------------------------------------------------
+" NERD Tree Plugin Settings
+"-----------------------------------------------------------------------------
+" Toggle the NERD Tree on an off with F7
+nmap <F7> :NERDTreeToggle<CR>
+
+" Close the NERD Tree with Shift-F7
+nmap <S-F7> :NERDTreeClose<CR>
+
+" Store the bookmarks file in perforce
+"let NERDTreeBookmarksFile="~/.vim/NERDTreeBookmarks"
+
+" Show the bookmarks table on startup
+"let NERDTreeShowBookmarks=1
+
+let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\._git$', '\._gitignore$']
+
+" Auto open nerdTree where i want...
+autocmd VimEnter * cd /srv/dropbox
+autocmd VimEnter * NERDTree
+autocmd VimEnter * Alias git Git
+autocmd VimEnter * wincmd p
