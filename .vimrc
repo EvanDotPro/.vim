@@ -1,6 +1,9 @@
 " This is Evan's Vim configuration
 " More info may eventually be available at http://www.evan.pro/
 
+" have pathogen load all plugins
+call pathogen#runtime_append_all_bundles()
+
 " Let's use the sexy lucius color theme
 colors lucius
 
