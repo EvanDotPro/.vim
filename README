@@ -1,5 +1,31 @@
-This is simply a copy of my latest vim configuration (mainly used for web development)
+This is my Vim configuration. It is mostly used for web development (PHP, JS, HTML, CSS) but is
+by no means limited to such.
 
-Requires Exuberant Ctags
+INTSALL:
 
-symlink .vimrc to ~/.vimrc
+To install, clone my repository and symlink the .vim directory and .vimrc files to the appropriate places.
+
+Make sure you've installed Exuberant Ctags.
+
+
+
+WHAT'S IN IT:
+    - All plugins/scripts that are maintained of Github are added as submodules for easy updating
+    - Automatically loads changes to .vimrc
+    - Several convinient key bindings for convinience
+    - Status line includes Git branch name and status for focused file
+
+PLUGINS / SCRIPTS:
+    - lucius color theme
+    - Updated syntax highlighting for PHP 5.3
+    - NERDTree - nice file tree explorer
+    - MiniBufExplorer - "tabbed" buffers
+    - Fugitive - use Git easily within Vim
+    - cmdalias - Allows lowercase commands to be auto-corrected (:git status -> :Git status)
+    - Bclose - gracefully close buffers (see <leader>q shortcut below)
+
+MY CUSTOM SHORTCUTS:
+    - <leader>e - Open .vimrc for editing
+    - <leader>w - Write current file (shortcut for :w<cr>)
+    - <leader>q - Close current tab/buffer gracefully without screwing up the buffers
+    - Ctrl-p / Ctrl-n - previous or next tab/buffer... matches irssi shortcuts for consistency

@@ -44,18 +44,41 @@ set smartcase
 " allow buffers to have unsaved changes
 set hidden
 
+" Close a bugger
+nmap <leader>q :Bclose<cr>
+
 " Fast saving
 nmap <leader>w :w!<cr>
 
 " Fast editing of the .vimrc
 map <leader>e :e! ~/.vim/.vimrc<cr>
-" When vimrc is edited, reload it
-autocmd! bufwritepost .vimrc source ~/.vim/.vimrc
-autocmd! bufwritepost .vimrc NERDTreeToggle|NERDTreeToggle
+
+autocmd BufWrite * :%s/[ \t\r]\+$//e
+
+" When vimrc is edited, reload it... reload NERDTree to fix color glitch
+autocmd! bufwritepost .vimrc NERDTreeToggle|source ~/.vim/.vimrc|NERDTreeToggle
+
+" Highlight the current line
+set cursorline
+
+" Show line numbers
+set number
+
+" Allow the cursor to go into 'invalid' places
+set virtualedit=all
+
+" Cool trick to show what you're replacing/changing
+set cpoptions+=$
+
+" Turn off backup stuff
+set nobackup
+set nowb
+set noswapfile
 
 
-"""""""" STATUS / COMMAND LINE
-
+"-----------------------------------------------------------------------------
+" Status and Command Line
+"-----------------------------------------------------------------------------
 " Always put a status line in, even if there is only one window
 set laststatus=2
 
@@ -63,8 +86,15 @@ set laststatus=2
 set ch=2
 
 " Set the status line the way i like it
-"set stl=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%c\ Buf:%n\ [%b][0x%B]\ %{fugitive#statusline()}
+set stl=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%c\ Buf:%n\ [%b][0x%B]\ %{fugitive#statusline()}
 
+" Set GUI dimensions
+if has("gui_running")
+  " GUI is running or is about to start.
+  " Maximize gvim window.
+  set guioptions-=T
+  set lines=100 columns=171
+endif
 
 "-----------------------------------------------------------------------------
 " NERD Tree Plugin Settings
@@ -89,3 +119,18 @@ autocmd VimEnter * cd /srv/dropbox
 autocmd VimEnter * NERDTree
 autocmd VimEnter * Alias git Git
 autocmd VimEnter * wincmd p
+
+
+"------------------
+" MiniBufExplorer
+"------------------
+set switchbuf=usetab
+map <C-p> :bprev<cr>
+map <C-n> :bnext<cr>
+autocmd BufRead,BufNew,BufWritePost,CursorMovedI,CursorMoved * UMiniBufExplorer
+
+"-------------------
+" PHP STUFF
+"-------------------
+:autocmd FileType php map <C-L> :!php -l %<cr>
+set errorformat=%m\ in\ %f\ on\ line\ %l
