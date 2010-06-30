@@ -2,12 +2,9 @@ This is my Vim configuration. It is mostly used for web development (PHP, JS, HT
 by no means limited to such.
 
 INTSALL:
-
 To install, clone my repository and symlink the .vim directory and .vimrc files to the appropriate places.
-
 Make sure you've installed Exuberant Ctags.
-
-
+Unfortunately, I'm using symlinks for now, so this configuration will likely only work on Linux.
 
 WHAT'S IN IT:
     - All plugins/scripts that are maintained of Github are added as submodules for easy updating
