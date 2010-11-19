@@ -131,6 +131,9 @@ endfunction
 "--------------------
 :autocmd FileType php map <C-L> :!php -l %<cr>
 set errorformat=%m\ in\ %f\ on\ line\ %l
+inoremap <C-d> <ESC>:call PhpDocSingle()<CR>i
+nnoremap <C-d> :call PhpDocSingle()<CR>
+vnoremap <C-d> :call PhpDocRange()<CR>
 
 "-----------------------------------------------------------------------------
 " Status and Command Line
