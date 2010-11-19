@@ -104,9 +104,33 @@ map <leader>c		"+y
 " Select all text
 nmap <C-a> ggVG
 
+" Intelligent tab completion
+inoremap <silent> <Tab> <C-r>=<SID>InsertTabWrapper(1)<CR>
+inoremap <silent> <S-Tab> <C-r>=<SID>InsertTabWrapper(-1)<CR>
+function! <SID>InsertTabWrapper(direction)
+  let idx = col('.') - 1
+  let str = getline('.')
+  if a:direction > 0 && idx >= 2 && str[idx - 1] == ' '
+        \&& str[idx - 2] =~? '[a-z]'
+    if &softtabstop && idx % &softtabstop == 0
+      return "\<BS>\<Tab>\<Tab>"
+    else
+      return "\<BS>\<Tab>"
+    endif
+  elseif idx == 0 || str[idx - 1] !~? '[a-z]'
+    return "\<Tab>"
+  elseif a:direction > 0
+    return "\<C-p>"
+  else
+    return "\<C-n>"
+  endif
+endfunction
+
 "--------------------
 " PHP-Specific Stuff
 "--------------------
+:autocmd FileType php map <C-L> :!php -l %<cr>
+set errorformat=%m\ in\ %f\ on\ line\ %l
 
 "-----------------------------------------------------------------------------
 " Status and Command Line
@@ -144,7 +168,7 @@ nmap <S-F6> :NERDTreeClose<CR>
 "let NERDTreeShowBookmarks=1
 
 let NERDTreeShowHidden=1
-let NERDTreeIgnore=['\._git$', '\._gitignore$'] " this is something custom for me, you can safely remove it
+let NERDTreeIgnore=['\.get$', '\.getempty$'] " this is something custom for me, you can safely remove it
 
 " Auto open nerdTree where i want...
 autocmd VimEnter * cd /srv/dropbox
@@ -174,9 +198,3 @@ map <C-n> :bnext<cr>
 
 " Tweak to make MiniBufExplorer automatically refresh when needed
 autocmd BufRead,BufNew,BufWritePost,CursorMovedI,CursorMoved * UMiniBufExplorer
-
-"-------------------
-" PHP STUFF
-"-------------------
-:autocmd FileType php map <C-L> :!php -l %<cr>
-set errorformat=%m\ in\ %f\ on\ line\ %l
