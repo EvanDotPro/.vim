@@ -1,7 +1,7 @@
 This is my Vim configuration. It is mostly used for web development (PHP, JS, HTML, CSS) but is
 by no means limited to such.
 
-INTSALL:
+INSTALL:
 To install, clone my repository and symlink the .vim directory and .vimrc files to the appropriate places.
 Make sure you've installed Exuberant Ctags.
 Unfortunately, I'm using symlinks for now, so this configuration will likely only work on Linux.
@@ -9,10 +9,10 @@ Unfortunately, I'm using symlinks for now, so this configuration will likely onl
 WHAT'S IN IT:
     - All plugins/scripts that are maintained of Github are added as submodules for easy updating
     - Automatically loads changes to .vimrc
-    - Several convinient key bindings for convinience
+    - Several convenient key bindings for convenience
     - Status line includes Git branch name and status for focused file
 
-PLUGINS / SCRIPTS:
+PLUG-INS / SCRIPTS:
     - lucius color theme
     - Updated syntax highlighting for PHP 5.3
     - NERDTree - nice file tree explorer
@@ -26,3 +26,17 @@ MY CUSTOM SHORTCUTS:
     - <leader>w - Write current file (shortcut for :w<cr>)
     - <leader>q - Close current tab/buffer gracefully without screwing up the buffers
     - Ctrl-p / Ctrl-n - previous or next tab/buffer... matches irssi shortcuts for consistency
+    - F6 - toggle NERDTree
+    - S-F6 - completely close NERDTree (I think)
+
+FAQ:
+    Q: Why MiniBufExplorer instead of GVim tabs?
+    A: First, GVim tabs only work in GVim, not in normal Vim (perhaps you want to edit something quickly via ssh)... Second, Gvim tabs are more like entire different instances of Vim per tab, thus overwhelming and not natural to someone coming from an Eclipse/Netbeans/etc type environment. I have MiniBufExplorer configured to behave almost exactly like one would expect tabs to work in whatever editor/IDE they came from; something that is not easy to accomplish with Gvim's tabs.
+
+TO-DO:
+    - Get omni-completion working as good as possible
+    - Integrate the PHP manual in a nice way
+    - Ctrl-click / Ctrl-k on class / method to go to where it's declared
+    - Come up with a sane way of handling the system clipboard
+    - Organize gvim-specific stuff into a .gvimrc
+    - Investigate the option of possibly using tabs over MiniBufExplorer
