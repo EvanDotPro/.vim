@@ -25,6 +25,9 @@ MY CUSTOM SHORTCUTS:
     - <leader>e - Open .vimrc for editing
     - <leader>w - Write current file (shortcut for :w<cr>)
     - <leader>q - Close current tab/buffer gracefully without screwing up the buffers
+    - <leader>c - Copy current selection to system clipboard
+    - <leader>v - Paste current selection from system clipboard
+    - Ctrl-a - Select all
     - Ctrl-p / Ctrl-n - previous or next tab/buffer... matches irssi shortcuts for consistency
     - F6 - toggle NERDTree
     - S-F6 - completely close NERDTree (I think)
