@@ -178,6 +178,7 @@ autocmd VimEnter * cd /srv/dropbox
 autocmd VimEnter * NERDTree
 autocmd VimEnter * Alias git Git
 autocmd VimEnter * wincmd p
+autocmd VimEnter * source ~/.vim/.nerdexecuteplugin.vim
 
 
 "------------------
